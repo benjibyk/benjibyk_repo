@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Submit URL</title>
+  </head>
+  <style>
+    body {
+      font-family: "consolas";
+    }
+    section {
+      background-color: #dddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      margin: auto;
+      width: fit-content;
+      box-shadow: 5px 5px 5px silver;
+    }
+    .form {
+      text-align: center;
+    }
+
+    section h1 {
+      font-family: "consolas";
+    }
+    section button {
+      padding: 10px;
+      cursor: pointer;
+    }
+    section button:hover {
+      background-color: black;
+      color: #dddd;
+    }
+
+    section input {
+      padding: 10px;
+      width: 500px;
+    }
+  </style>
+  <body>
+    <section>
+      <div class="form">
+        <h1>Submit URL</h1>
+        <form method="post" action="{% url 'submit_url' %}">
+          {% csrf_token %} {{ form.as_p }} {% if error %}
+          <p>{{ error }}</p>
+          {% endif %}
+          <label for="original_url">Enter the URL</label><br />
+          <input
+            type="url"
+            id="original_url"
+            name="original_url"
+            required
+            placeholder="https://example.com"
+          /><br /><br />
+          <button type="submit">Shorten URL</button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
